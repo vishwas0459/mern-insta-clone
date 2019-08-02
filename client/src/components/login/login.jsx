@@ -14,19 +14,22 @@ class Login extends Component {
     };
     console.log('Login Form Submitted!!!', user);
     const resp = await axios.post('/login', user);
-    this.setState({ data: resp });
+    console.log(resp);
     //TODO:: Get the token from backend after successful login and redirect to new page
     console.log(this.state.data);
+    this.setState({ data: resp });
+    this.props.history.push('/home');
   };
   handleInputChange = ({ currentTarget }) => {
     // console.log(currentTarget.value);
     this.setState({ [currentTarget.id]: currentTarget.value });
   };
   render() {
+    console.log('props', this.props);
     return (
       <div className="container">
         {this.state.data && JSON.stringify(this.state.data.data)}
-        <form onSubmit={this.onSubmitLogin}>
+        <form onSubmit={event => this.onSubmitLogin(event)}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
             <input
