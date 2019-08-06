@@ -3,8 +3,7 @@ import axios from 'axios';
 class Login extends Component {
   state = {
     email: '',
-    password: '',
-    data: null
+    password: ''
   };
   onSubmitLogin = async event => {
     event.preventDefault();
@@ -16,19 +15,17 @@ class Login extends Component {
     const resp = await axios.post('/login', user);
     console.log(resp);
     //TODO:: Get the token from backend after successful login and redirect to new page
-    console.log(this.state.data);
-    this.setState({ data: resp });
+    // console.log(this.state.data);
     this.props.history.push('/home');
+    // this.setState({ data: resp });
   };
   handleInputChange = ({ currentTarget }) => {
     // console.log(currentTarget.value);
     this.setState({ [currentTarget.id]: currentTarget.value });
   };
   render() {
-    console.log('props', this.props);
     return (
       <div className="container">
-        {this.state.data && JSON.stringify(this.state.data.data)}
         <form onSubmit={event => this.onSubmitLogin(event)}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>

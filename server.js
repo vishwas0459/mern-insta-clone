@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 app.use(express.json());
 
+const User = require('./models/user.model');
+
 mongoose
   .connect('mongodb://localhost:27017/mern-insta-clone-db', {
     useNewUrlParser: true
@@ -13,12 +15,12 @@ mongoose
   })
   .catch(err => console.log('Something went wrong'));
 
-const userSchema = mongoose.Schema({
-  email: String,
-  password: String
-});
+// const userSchema = mongoose.Schema({
+//   email: String,
+//   password: String
+// });
 
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 function createUser() {
   const newUser = new User({
     email: 'vishwas',
@@ -36,8 +38,12 @@ app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   const user = { email, password };
   console.log('client data', user);
-  const result = await User.find(user);
-  console.log('result', result);
+  try {
+    const result = await User.find(user);
+    console.log('result', result);
+  } catch (error) {
+    console.log('Something went wrong!!!', error);
+  }
   if (result.length > 0) {
     res.send(result);
   } else {
