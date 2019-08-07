@@ -21,13 +21,14 @@ mongoose
 // });
 
 // const User = mongoose.model('User', userSchema);
-function createUser() {
-  const newUser = new User({
-    email: 'vishwas',
-    password: 'meshram'
-  });
-  newUser.save();
-}
+// console.log('User', typeof User);
+// function createUser() {
+//   const newUser = new User({
+//     email: 'vishwas',
+//     password: 'meshram'
+//   });
+//   newUser.save();
+// }
 app.get('/api/', async (req, res) => {
   const user = await User.find({});
   console.log('User', user);
@@ -39,15 +40,12 @@ app.post('/api/login', async (req, res) => {
   const user = { email, password };
   console.log('client data', user);
   try {
-    const result = await User.find(user);
+    const result = await User.find({});
     console.log('result', result);
+    res.send(result);
   } catch (error) {
     console.log('Something went wrong!!!', error);
-  }
-  if (result.length > 0) {
-    res.send(result);
-  } else {
-    res.status(404).send('no user exist');
+    res.send(error);
   }
 });
 

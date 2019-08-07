@@ -6,12 +6,12 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-function createUser() {
-  const newUser = new User({
-    email: 'vishwas',
-    password: 'meshram'
-  });
-  newUser.save();
-}
+// function createUser() {
+//   const newUser = new User({
+//     email: 'vishwas',
+//     password: 'meshram'
+//   });
+//   newUser.save();
+// }
 
-module.exports = { User };
+module.exports = User;
