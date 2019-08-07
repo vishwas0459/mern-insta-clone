@@ -10,8 +10,13 @@ class App extends React.Component {
     password: '',
     data: null
   };
+  handleInputChange = ({ currentTarget }) => {
+    // console.log(currentTarget.value);
+    this.setState({ [currentTarget.id]: currentTarget.value });
+  };
   onSubmitLogin = async event => {
     event.preventDefault();
+    console.log('Props', this.props);
     const user = {
       email: this.state.email,
       password: this.state.password
@@ -21,6 +26,7 @@ class App extends React.Component {
       const resp = await axios.post('/login', user);
       console.log(resp.data[0]);
       this.setState({ data: resp.data[0] });
+      this.props.history.push('/home');
     } catch (error) {
       console.log('Something went wrong from client', error);
     }
@@ -28,11 +34,6 @@ class App extends React.Component {
     // console.log(this.state.data);
     // this.setState({ data: resp });
   };
-  handleInputChange = ({ currentTarget }) => {
-    // console.log(currentTarget.value);
-    this.setState({ [currentTarget.id]: currentTarget.value });
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -50,17 +51,14 @@ class App extends React.Component {
             render={props => (
               <Login
                 {...props}
-                onSubmitLogin={this.onSubmitLogin}
                 handleInputChange={this.handleInputChange}
                 email={this.state.email}
                 password={this.state.password}
+                onSubmitLogin={this.onSubmitLogin}
               />
             )}
           />
-          <Route
-            path="/home"
-            render={props => <Home {...props} user={this.state.email} />}
-          />
+          <Route path="/home" component={Home} />
         </Switch>
       </React.Fragment>
     );

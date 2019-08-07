@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 class Login extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="container">
         <form onSubmit={event => this.props.onSubmitLogin(event)}>
