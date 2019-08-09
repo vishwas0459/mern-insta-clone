@@ -14,28 +14,9 @@ mongoose
     console.log('Connected to db...');
   })
   .catch(err => console.log('Something went wrong'));
-
-// app.get('/api/', async (req, res) => {
-//   const user = await User.find({});
-//   console.log('User', user);
-//   res.send('Hello from express server!!!');
-// });
-
-// app.post('/api/login', async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = { email: 'vishwas', password };
-//   console.log('client data', user);
-//   try {
-//     const result = await User.find(user);
-//     if (result.length > 0) {
-//       console.log('user is found', result);
-//     }
-//     res.send(result);
-//   } catch (error) {
-//     console.log('Something went wrong!!!', error);
-//     res.send(error);
-//   }
-// });
+app.get('/', (req, res) => {
+  res.status(200).send('Hello from backedn!!!');
+});
 
 //TODO: setup login with mLab
 const port = 3002;

@@ -4,6 +4,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
+    username: '',
     data: null
   };
 
@@ -15,19 +16,15 @@ class Login extends Component {
     event.preventDefault();
     const user = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      username: this.state.username
     };
-    try {
-      console.log('User', user);
-      const resp = await axios.post('/login', user);
-      this.setState({ data: resp.data[0] });
-      this.props.history.push('/home');
-    } catch (error) {
-      console.log('Something went wrong from client', error);
-    }
-    //TODO:: Get the token from backend after successful login and redirect to new page
-    // console.log(this.state.data);
-    // this.setState({ data: resp });
+    console.log('users', user);
+
+    axios
+      .post('/api/users', user)
+      .then(res => console.log('user saved successfully...', res.data))
+      .catch(err => console.log(err.message));
   };
 
   render() {
@@ -60,6 +57,19 @@ class Login extends Component {
               onChange={event => this.handleInputChange(event)}
             />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="username"
+              className="form-control"
+              id="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={event => this.handleInputChange(event)}
+            />
+          </div>
+
           <div className="form-group form-check">
             <input
               type="checkbox"
