@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-function validate(user) {
+function validateUser(user) {
   const schema = {
     username: Joi.string().required(),
     password: Joi.string().required(),
@@ -29,4 +29,4 @@ function validate(user) {
 }
 
 exports.User = User;
-exports.validate = validate;
+exports.validate = validateUser;

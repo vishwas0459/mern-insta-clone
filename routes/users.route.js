@@ -2,24 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { User, validate } = require('../models/user.model');
 
-router.post('/', async (req, res) => {
-  const { error } = validate(req.body);
-  //   console.log(error);
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
-  try {
-    let user = User.findOne({ email: req.body.email });
-    if (user.length > 0) return res.status(400).send('user alreay exists');
-    user = new User(req.body);
-    const result = await user.save();
-    user = { email: result.email, username: result.username };
-    res.status(200).send(user);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
 // get all users
 router.get('/', async (req, res) => {
   //   const { username, password } = req.body;
@@ -32,6 +14,23 @@ router.get('/', async (req, res) => {
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send('Why???', error);
+  }
+});
+
+router.post('/', async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    let user = User.findOne({ email: req.body.email });
+    if (user.length > 0) return res.status(400).send('user alreay exists');
+
+    user = new User(req.body);
+    const result = await user.save();
+    user = { email: result.email, username: result.username };
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
