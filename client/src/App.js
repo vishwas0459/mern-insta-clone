@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-// import axios from 'axios';
+import axios from 'axios';
 import Register from './components/register/register';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/home/home';
 import UserList from './components/userList/userList';
+import Login from './components/login/login';
 class App extends React.Component {
   state = {
     email: '',
@@ -24,7 +25,7 @@ class App extends React.Component {
           <Route path="/register" exact={true} component={Register} />
 
           <Route path="/userList" exact={true} component={UserList} />
-          <Route path="/" component={Home} />
+          <Route path="/login" exact={true} component={Login} />
         </Switch>
       </React.Fragment>
     );

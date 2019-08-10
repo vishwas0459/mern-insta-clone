@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const users = require('./routes/users.route');
+const auth = require('./middlewares/auth');
+require('dotenv').config();
+// console.log('env', process.env.JWT_SECRETE);
 app.use(express.json());
+app.use('/api/auth', auth);
 app.use('/api/users', users);
 mongoose
   .connect('mongodb://localhost:27017/mern-insta-clone-db', {

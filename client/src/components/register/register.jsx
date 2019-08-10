@@ -11,7 +11,7 @@ class Register extends Component {
   handleInputChange = ({ currentTarget }) => {
     this.setState({ [currentTarget.id]: currentTarget.value });
   };
-  onSubmitLogin = async event => {
+  onRegister = async event => {
     console.log('submit Register');
     event.preventDefault();
     const newUser = {
@@ -20,11 +20,11 @@ class Register extends Component {
       username: this.state.username
     };
     console.log('users', newUser);
-    let result = null;
     try {
-      result = await axios.post('/api/users', newUser);
-      if (result.data)
-        return alert(`'User saved successfully':${result.data.username}`);
+      const response = await axios.post('/api/users', newUser);
+      // console.log('data resp', response);
+      // if (response.data)
+      alert(`'User saved successfully':${response.data.username}`);
     } catch (error) {
       console.log('something went wrong...', error.response);
       this.setState({ data: error.response.data });
@@ -34,9 +34,12 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <p>{this.state.data && this.state.data}</p>
+        {this.state.data && (
+          <p className="alert alert-danger">{this.state.data}</p>
+        )}
+
         <div className="container">
-          <form onSubmit={this.onSubmitLogin}>
+          <form onSubmit={this.onRegister}>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
               <input
