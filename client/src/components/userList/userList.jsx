@@ -4,8 +4,9 @@ class UserList extends Component {
   state = {
     data: null
   };
-  async componentDidMount() {
+  async componentWillMount() {
     const { data } = await axios.get('/api/users');
+    console.log('data', data);
     if (data) this.setState({ data });
   }
   render() {
