@@ -17,7 +17,7 @@ mongoose
   })
   .catch(err => console.log('Something went wrong'));
 app.get('/', (req, res) => {
-  res.status(200).send('Hello from backedn!!!');
+  res.status(200).send('Hello from backend!!!');
 });
 
 //TODO: setup login with mLab

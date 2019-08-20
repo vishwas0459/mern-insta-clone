@@ -23,29 +23,6 @@ router.post('/', async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  // try {
-  //   let user = await User.findOne({ email: req.body.email });
-  //   if (user) return res.status(400).send('user alreay exists');
-
-  //   const { email, username, password } = req.body;
-  //   // create hash password before saving to database
-  //   const salt = await bcrypt.genSalt(10);
-  //   const hashPassword = await bcrypt.hash(password, salt);
-  //   user = new User({
-  //     username,
-  //     email,
-  //     password: hashPassword
-  //   });
-  //   const result = await user.save();
-  //   console.log('user saved', result);
-  //   const token = jwt.sign(user, process.env.JWT_SECRETE);
-  //   console.log('Token', token);
-  //   user = { email: result.email, username: result.username };
-  //   res.status(200).send(user);
-  // } catch (error) {
-  //   res.status(400).send(error);
-  // }
-
   // user input is correct.
   try {
     // check if user already exist with email
@@ -118,6 +95,35 @@ router.put('/:username', async (req, res) => {
   } catch (error) {
     return res.status(404).send(error.message);
   }
+});
+
+router.post('/api/seed', async (req, res) => {
+  // const { error } = validate(req.body);
+  console.log('resp', req.body);
+  // if (error)
+  // return res.status(400).send(error.details[0].message);
+
+  // user input is correct.
+  // try {
+  //   // check if user already exist with email
+  //   let user = await User.findOne({ email: req.body.email });
+  //   if (user) return res.status(400).send('User already exists');
+
+  //   //if user not exist then save it to database
+  //   user = new User(_.pick(req.body, ['email', 'username', 'password']));
+
+  //   //hash the password
+  //   const salt = await bcrypt.genSalt(10);
+  //   user.password = await bcrypt.hash(user.password, salt);
+  //   await user.save();
+
+  //   console.log('user saved', user);
+  //   // send the response of
+  //   res.status(200).send(_.pick(user, ['_id', 'username', 'email']));
+  // } catch (error) {
+  //   console.log('something went wrong in backend', error);
+  //   res.send(400).send(error);
+  // }
 });
 
 module.exports = router;
