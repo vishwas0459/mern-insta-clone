@@ -10,7 +10,9 @@ router.get('/', async (req, res) => {
   try {
     let user = await User.find({}).select({
       username: 1,
-      email: 1
+      email: 1,
+      pictureUrl: 1,
+      name: 1
     });
     if (user.length === 0) return res.status(404).send('User not found');
     res.status(200).send(user);
