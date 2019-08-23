@@ -6,6 +6,7 @@ import Home from './components/home/home';
 import UserList from './components/userList/userList';
 import Login from './components/login/login';
 import Profile from './components/profile/profile';
+import NavBar from './components/navbar/navbar';
 class App extends React.Component {
   state = {
     email: '',
@@ -15,6 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <NavBar />
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <NavLink className="navbar-brand" to="/login">
             <i className="fa fa-user-o" aria-hidden="true" />

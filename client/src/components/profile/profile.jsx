@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 // const getUserData = async id => {
 //   const { data } = await axios.get('/api/users/' + id);
