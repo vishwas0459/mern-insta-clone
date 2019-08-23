@@ -5,6 +5,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import Home from './components/home/home';
 import UserList from './components/userList/userList';
 import Login from './components/login/login';
+import Profile from './components/profile/profile';
 class App extends React.Component {
   state = {
     email: '',
@@ -50,6 +51,7 @@ class App extends React.Component {
           </div>
         </nav>
         <Switch>
+          <Route path="/users/:id" exact={true} component={Profile} />
           <Route path="/register" exact={true} component={Register} />
           <Route path="/userList" exact={true} component={UserList} />
           <Route path="/login" exact={true} component={Login} />

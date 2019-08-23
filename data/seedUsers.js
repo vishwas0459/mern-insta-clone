@@ -44,7 +44,8 @@ app.post('/seedDB', async (req, res) => {
 
   const userInfo = data.map(user => {
     return {
-      name: capitalMe(user.name.first) + ' ' + capitalMe(user.name.last),
+      firstName: capitalMe(user.name.first),
+      lastName: capitalMe(user.name.last),
       username: user.login.username,
       password: user.login.password,
       city: capitalMe(user.location.city),
@@ -59,7 +60,8 @@ app.post('/seedDB', async (req, res) => {
   // res.send(JSON.stringify(userInfo));
   // create a model
   const User = mongoose.model('User', {
-    name: String,
+    firstName: String,
+    lastName: String,
     username: String,
     password: String,
     city: String,
@@ -80,7 +82,8 @@ app.post('/seedDB', async (req, res) => {
       'dob',
       'pictureUrl',
       'city',
-      'name',
+      'firstName',
+      'lastName',
       'postcode'
     ]);
 

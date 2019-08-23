@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
       username: 1,
       email: 1,
       pictureUrl: 1,
-      name: 1
+      firstName: 1,
+      lastName: 1
     });
     if (user.length === 0) return res.status(404).send('User not found');
     res.status(200).send(user);
@@ -49,13 +50,30 @@ router.post('/', async (req, res) => {
 });
 
 // find User by username
-router.get('/:username', async (req, res) => {
-  let username = req.params.username;
+// router.get('/:username', async (req, res) => {
+//   let username = req.params.username;
+//   try {
+//     let user = await User.find({ username }).select({
+//       username: 1,
+//       email: 1
+//     });
+//     if (user.length === 0) return res.status(404).send('User not found');
+//     res.status(200).send(user);
+//   } catch (error) {
+//     res.status(404).send('Why???', error);
+//   }
+// });
+
+//findby id
+router.get('/:id', async (req, res) => {
+  console.log('inside id', req.params.id);
+  let id = req.params.id;
   try {
-    let user = await User.find({ username }).select({
-      username: 1,
-      email: 1
-    });
+    let user = await User.findById({ _id: id });
+    // .select({
+    //   username: 1,
+    //   email: 1
+    // });
     if (user.length === 0) return res.status(404).send('User not found');
     res.status(200).send(user);
   } catch (error) {
